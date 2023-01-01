@@ -10,4 +10,7 @@
     <color name="neutral_white">#E9E9EB</color>
     <color name="gray">#B5A7B8</color>
     <color name="gray_dark">#524f5f</color>
+    <color name="dark">#0a0b13</color>
+    <color name="green">#2a8c06</color>
+
 </resources>
