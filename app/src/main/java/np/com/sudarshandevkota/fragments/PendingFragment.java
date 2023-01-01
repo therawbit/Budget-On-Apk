@@ -1,4 +1,4 @@
-package np.com.sudarshandevkota;
+package np.com.sudarshandevkota.fragments;
 
 import android.os.Bundle;
 
@@ -8,13 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import np.com.sudarshandevkota.R;
 
-public class StatementFragment extends Fragment {
+
+public class PendingFragment extends Fragment {
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statement, container, false);
+        return inflater.inflate(R.layout.fragment_pending, container, false);
     }
 }

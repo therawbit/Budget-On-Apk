@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import np.com.sudarshandevkota.fragments.HomeFragment;
+import np.com.sudarshandevkota.fragments.PendingFragment;
+import np.com.sudarshandevkota.fragments.StatementFragment;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
