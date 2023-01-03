@@ -1,10 +1,11 @@
 package np.com.sudarshandevkota;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,16 +33,14 @@ public class LoginActivity extends AppCompatActivity {
         toSignUpBtn = findViewById(R.id.btn_toSignup);
         loginBtn.setOnClickListener(loginListener);
         toSignUpBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SignupActivity.class)));
+        isLoggedIn();
     }
 
     View.OnClickListener loginListener = view -> {
         String email = emailET.getText().toString();
         String password = passwordET.getText().toString();
         if(!email.isEmpty() && !password.isEmpty())
-            login(email,password);
-        else{
-            startActivity(new Intent(this,MainActivity.class));
-        }
+            login(email.trim(),password.trim());
 
     };
     private void login(String username,String password){
@@ -49,13 +48,22 @@ public class LoginActivity extends AppCompatActivity {
         Call<String> call = api.login(username,password);
         call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("TAG", "onResponse: "+response.code());
+            public void onResponse(@NonNull Call<String> call, Response<String> response) {
+                SharedPreferences preferences = getSharedPreferences("BudgetOn",MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("username",username);
+                editor.putString("password",password);
+                editor.apply();
+                goToHome();
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t);
+                showToast("Login Failed");
+                SharedPreferences preferences = getSharedPreferences("BudgetOn",MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
 
             }
         });
@@ -65,5 +73,15 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void showToast(String r){
         Toast.makeText(this, r, Toast.LENGTH_SHORT).show();
+    }
+    private void isLoggedIn(){
+        SharedPreferences preferences = getSharedPreferences("BudgetOn",MODE_PRIVATE);
+        if(preferences.contains("username")){
+            login(preferences.getString("username",""),preferences.getString("password",""));
+        }
+
+    }
+    private void goToHome(){
+        startActivity(new Intent(this,MainActivity.class));
     }
 }
