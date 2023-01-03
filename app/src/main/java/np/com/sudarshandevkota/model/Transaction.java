@@ -8,15 +8,15 @@ public class Transaction {
     private double amount;
     private String note;
     private Date timestamp;
-    private boolean isPending;
+    private boolean pending;
     private TransactionType transactionType;
 
     public boolean isPending() {
-        return isPending;
+        return pending;
     }
 
     public void setPending(boolean pending) {
-        isPending = pending;
+        this.pending = pending;
     }
 
     public TransactionType getTransactionType() {
