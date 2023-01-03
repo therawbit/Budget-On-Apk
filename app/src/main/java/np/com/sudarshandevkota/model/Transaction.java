@@ -8,6 +8,24 @@ public class Transaction {
     private double amount;
     private String note;
     private Date timestamp;
+    private boolean isPending;
+    private TransactionType transactionType;
+
+    public boolean isPending() {
+        return isPending;
+    }
+
+    public void setPending(boolean pending) {
+        isPending = pending;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
 
     public int getId() {
         return id;

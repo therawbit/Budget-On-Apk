@@ -32,6 +32,12 @@ public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Transaction transaction = list.get(position);
+        holder.senderOrReceiverTV.setText(transaction.getSenderOrReceiver());
+        holder.noteTV.setText(transaction.getNote());
+        holder.amountTV.setText(String.valueOf(transaction.getAmount()));
+        holder.timestampTV.setText(transaction.getTimestamp().toString());
+
 
     }
 
