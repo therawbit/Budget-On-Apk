@@ -39,13 +39,12 @@
         android:id="@+id/et_emailReg"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
@@ -53,13 +52,13 @@
         android:id="@+id/et_conPassword"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.218"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_passwordReg" />
 
@@ -67,13 +66,12 @@
         android:id="@+id/et_passwordReg"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_emailReg" />
 
@@ -81,7 +79,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="Register"
         android:textColor="?attr/colorPrimary"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -91,14 +89,15 @@
 
     <Button
         android:id="@+id/btn_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_width="190dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="164dp"
         android:text="Sign Up"
         android:textAllCaps="false"
         android:textSize="25sp"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_toLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
