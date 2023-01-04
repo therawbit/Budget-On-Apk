@@ -93,6 +93,8 @@ public class TransactionActivity extends AppCompatActivity {
 
             }
         });
+        Toast.makeText(this, "Transaction Deleted Successfully.", Toast.LENGTH_SHORT).show();
+
         finish();
     };
 
@@ -112,7 +114,27 @@ public class TransactionActivity extends AppCompatActivity {
         });
     }
     View.OnClickListener updateListener = v->{
-
+        String senderOrReceiver = senderOrReceiverET.getText().toString();
+        double amount = Double.parseDouble(amountET.getText().toString());
+        TransactionType type = (TransactionType) spinner.getSelectedItem();
+        boolean isPending = pendingCB.isChecked();
+        String note = noteET.getText().toString();
+        Transaction t = (Transaction) getIntent().getSerializableExtra("object");
+        if (senderOrReceiver.isEmpty()) {
+            senderOrReceiverET.setError("Cannot be Empty.");
+        } else if (amount <= 0) {
+            amountET.setError("Must be greater than 0.");
+        } else if (note.isEmpty()) {
+            noteET.setError("Cannot be Empty.");
+        } else {
+            t.setNote(note);
+            t.setPending(isPending);
+            t.setTransactionType(type);
+            t.setAmount(amount);
+            t.setSenderOrReceiver(senderOrReceiver);
+            t.setTimestamp(null);
+            updateTransaction(t);
+        }
     };
 
     private void fillFields() {
@@ -122,5 +144,24 @@ public class TransactionActivity extends AppCompatActivity {
         senderOrReceiverET.setText(t.getSenderOrReceiver());
         pendingCB.setChecked(t.isPending());
         spinner.setSelection(t.getTransactionType().compareTo(TransactionType.INCOME));
+    }
+    private void updateTransaction(Transaction t){
+        ApiCalls api = RetrofitClient.getInstance().create(ApiCalls.class);
+        Call<String> call = api.updateTransaction(t);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        Toast.makeText(this, "Transaction Updated Successfully.", Toast.LENGTH_SHORT).show();
+        finish();
+
+
     }
 }
