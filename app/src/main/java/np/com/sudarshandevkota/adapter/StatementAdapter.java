@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import np.com.sudarshandevkota.Listener.ClickListener;
 import np.com.sudarshandevkota.R;
 import np.com.sudarshandevkota.model.Transaction;
 import np.com.sudarshandevkota.model.TransactionType;
@@ -20,10 +21,12 @@ import np.com.sudarshandevkota.model.TransactionType;
 public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.ViewHolder>{
     private Context context;
     private ArrayList<Transaction> list;
+    private ClickListener listener;
 
-    public StatementAdapter(Context context, ArrayList<Transaction> list) {
+    public StatementAdapter(Context context, ArrayList<Transaction> list,ClickListener listener) {
         this.context = context;
         this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -45,6 +48,8 @@ public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.View
         holder.noteTV.setText(transaction.getNote());
         holder.amountTV.setText("Rs. "+ transaction.getAmount());
         holder.timestampTV.setText(transaction.getTimestamp().toString());
+        holder.itemView.setOnClickListener(v->listener.click(position));
+
 
 
     }
@@ -62,6 +67,7 @@ public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.View
             amountTV = itemView.findViewById(R.id.tv_amount);
             noteTV = itemView.findViewById(R.id.tv_note);
             timestampTV = itemView.findViewById(R.id.tv_date);
+
         }
     }
 }

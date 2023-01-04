@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.net.CacheRequest;
 
 import np.com.sudarshandevkota.model.NewTransaction;
+import np.com.sudarshandevkota.model.Transaction;
 import np.com.sudarshandevkota.model.TransactionType;
 import np.com.sudarshandevkota.retrofit.ApiCalls;
 import np.com.sudarshandevkota.retrofit.RetrofitClient;
@@ -28,6 +29,7 @@ public class TransactionActivity extends AppCompatActivity {
     Spinner spinner;
     CheckBox pendingCB;
     Button addUpdateBtn,deleteBtn;
+    char type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,13 @@ public class TransactionActivity extends AppCompatActivity {
         deleteBtn = findViewById(R.id.btn_delete);
         addUpdateBtn.setOnClickListener(addUpdateListener);
         deleteBtn.setOnClickListener(deleteListener);
+        deleteBtn.setVisibility(View.INVISIBLE);
+        type = getIntent().getCharExtra("type",'a');
+        if(type=='u'){
+            addUpdateBtn.setText("Update");
+            deleteBtn.setVisibility(View.VISIBLE);
+            fillFields();
+        }
     }
 
     View.OnClickListener addUpdateListener = view -> {
@@ -83,5 +92,13 @@ public class TransactionActivity extends AppCompatActivity {
         });
 
 
+    }
+    private void fillFields(){
+        Transaction t = (Transaction) getIntent().getSerializableExtra("object");
+        amountET.setText(String.valueOf(t.getAmount()));
+        noteET.setText(t.getNote());
+        senderOrReceiverET.setText(t.getSenderOrReceiver());
+        pendingCB.setChecked(t.isPending());
+        spinner.setSelection(t.getTransactionType().compareTo(TransactionType.INCOME));
     }
 }

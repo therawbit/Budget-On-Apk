@@ -1,8 +1,9 @@
 package np.com.sudarshandevkota.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Transaction {
+public class Transaction implements Serializable {
     private int id;
     private String senderOrReceiver;
     private double amount;

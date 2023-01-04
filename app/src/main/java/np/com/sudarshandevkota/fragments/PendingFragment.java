@@ -1,5 +1,6 @@
 package np.com.sudarshandevkota.fragments;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,7 +15,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import np.com.sudarshandevkota.Listener.ClickListener;
 import np.com.sudarshandevkota.R;
+import np.com.sudarshandevkota.TransactionActivity;
 import np.com.sudarshandevkota.adapter.StatementAdapter;
 import np.com.sudarshandevkota.model.Transaction;
 import np.com.sudarshandevkota.retrofit.ApiCalls;
@@ -24,7 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class PendingFragment extends Fragment {
+public class PendingFragment extends Fragment implements ClickListener {
     RecyclerView pendingRv;
     ArrayList<Transaction> list;
     StatementAdapter adapter;
@@ -48,7 +51,7 @@ public class PendingFragment extends Fragment {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     list =(ArrayList<Transaction>) response.body().stream().filter(t->t.isPending()).collect(Collectors.toList());
                 }
-                adapter = new StatementAdapter(getActivity(),list);
+                adapter = new StatementAdapter(getActivity(),list,PendingFragment.this);
                 pendingRv.setAdapter(adapter);
             }
 
@@ -57,5 +60,13 @@ public class PendingFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void click(int position) {
+        Intent intent = new Intent(getActivity(), TransactionActivity.class);
+        intent.putExtra("type",'u');
+        intent.putExtra("object",list.get(position));
+        startActivity(intent);
     }
 }
