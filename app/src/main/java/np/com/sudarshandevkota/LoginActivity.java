@@ -39,8 +39,15 @@ public class LoginActivity extends AppCompatActivity {
     View.OnClickListener loginListener = view -> {
         String email = emailET.getText().toString();
         String password = passwordET.getText().toString();
-        if(!email.isEmpty() && !password.isEmpty())
+        if(email.isEmpty()){
+            emailET.setError("Email cannot be empty");
+
+        }else if(password.isEmpty() || password.length()<8){
+            passwordET.setError("Password must of at least 8 characters");
+        }else{
             login(email.trim(),password.trim());
+        }
+
 
     };
     private void login(String username,String password){
