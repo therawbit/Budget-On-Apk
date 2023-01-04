@@ -1,11 +1,13 @@
 package np.com.sudarshandevkota.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 
 import np.com.sudarshandevkota.R;
 import np.com.sudarshandevkota.model.Transaction;
+import np.com.sudarshandevkota.model.TransactionType;
 
 public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.ViewHolder>{
     private Context context;
@@ -30,9 +33,14 @@ public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.View
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Transaction transaction = list.get(position);
+        if(transaction.getTransactionType().equals(TransactionType.INCOME)){
+            holder.amountTV.setTextColor(context.getResources().getColor(R.color.green));
+            holder.senderOrReceiverTV.setTextColor(context.getResources().getColor(R.color.green));
+        }
         holder.senderOrReceiverTV.setText(transaction.getSenderOrReceiver());
         holder.noteTV.setText(transaction.getNote());
         holder.amountTV.setText(String.valueOf(transaction.getAmount()));

@@ -75,10 +75,10 @@ public class HomeFragment extends Fragment {
             }
         }
         total=income-expense;
-        totalTV.setText(String.valueOf(total));
-        incomeTV.setText(String.valueOf(income));
-        expenseTV.setText(String.valueOf(expense));
-        incomePendingTV.setText(String.valueOf(incomePending));
-        expensePendingTV.setText(String.valueOf(expensePending));
+        totalTV.setText("Rs. "+ total);
+        incomeTV.setText("Rs. "+ income);
+        expenseTV.setText("Rs. "+ expense);
+        incomePendingTV.setText("Rs. "+ incomePending);
+        expensePendingTV.setText("Rs. "+ expensePending);
     }
 }
