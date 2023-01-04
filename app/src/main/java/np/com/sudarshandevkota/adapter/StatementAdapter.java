@@ -38,12 +38,12 @@ public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Transaction transaction = list.get(position);
         if(transaction.getTransactionType().equals(TransactionType.INCOME)){
-            holder.amountTV.setTextColor(context.getResources().getColor(R.color.green));
-            holder.senderOrReceiverTV.setTextColor(context.getResources().getColor(R.color.green));
+            holder.amountTV.setTextColor(context.getColor(R.color.green));
+            holder.senderOrReceiverTV.setTextColor(context.getColor(R.color.green));
         }
         holder.senderOrReceiverTV.setText(transaction.getSenderOrReceiver());
         holder.noteTV.setText(transaction.getNote());
-        holder.amountTV.setText(String.valueOf(transaction.getAmount()));
+        holder.amountTV.setText("Rs. "+ transaction.getAmount());
         holder.timestampTV.setText(transaction.getTimestamp().toString());
 
 

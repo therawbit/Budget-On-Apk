@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.BudgetOn" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/secondary_light</item>
+        <item name="colorPrimary">@color/primary_light</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondary_light</item>
         <item name="colorSecondaryVariant">@color/primary_dark</item>
