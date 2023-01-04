@@ -2,6 +2,7 @@ package np.com.sudarshandevkota.retrofit;
 
 import java.util.ArrayList;
 
+import np.com.sudarshandevkota.model.NewTransaction;
 import np.com.sudarshandevkota.model.Transaction;
 import np.com.sudarshandevkota.model.UserRegister;
 import retrofit2.Call;
@@ -24,4 +25,7 @@ public interface ApiCalls {
 
     @POST("/user/register")
     Call<String> registerUser(@Body UserRegister register);
+
+    @POST("/transaction")
+    Call<String> addTransaction(@Body NewTransaction transaction);
 }

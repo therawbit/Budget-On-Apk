@@ -1,5 +1,6 @@
 package np.com.sudarshandevkota.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import np.com.sudarshandevkota.R;
+import np.com.sudarshandevkota.TransactionActivity;
 import np.com.sudarshandevkota.model.Transaction;
 import np.com.sudarshandevkota.model.TransactionType;
 import np.com.sudarshandevkota.retrofit.ApiCalls;
@@ -39,6 +41,7 @@ public class HomeFragment extends Fragment {
         incomePendingTV = view.findViewById(R.id.tv_income_pending);
         expensePendingTV = view.findViewById(R.id.tv_expense_pending);
         addTransactionBtn = view.findViewById(R.id.btn_addTransaction);
+        addTransactionBtn.setOnClickListener(v->startActivity(new Intent(getActivity(), TransactionActivity.class)));
         loadTransactions();
 
         return view;
