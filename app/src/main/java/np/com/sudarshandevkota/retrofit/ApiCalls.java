@@ -7,10 +7,13 @@ import np.com.sudarshandevkota.model.Transaction;
 import np.com.sudarshandevkota.model.UserRegister;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface ApiCalls {
     @GET("/transaction")
@@ -28,4 +31,10 @@ public interface ApiCalls {
 
     @POST("/transaction")
     Call<String> addTransaction(@Body NewTransaction transaction);
+
+    @DELETE("/transaction/{id}")
+    Call<String> deleteTransaction(@Path("id") int id);
+
+    @PUT("/transaction")
+    Call<String> updateTransaction(@Body Transaction transaction);
 }

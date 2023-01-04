@@ -25,11 +25,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TransactionActivity extends AppCompatActivity {
-    EditText senderOrReceiverET,noteET,amountET;
+    EditText senderOrReceiverET, noteET, amountET;
     Spinner spinner;
     CheckBox pendingCB;
-    Button addUpdateBtn,deleteBtn;
+    Button addUpdateBtn, deleteBtn;
     char type;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,46 +45,46 @@ public class TransactionActivity extends AppCompatActivity {
         spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, TransactionType.values()));
         addUpdateBtn = findViewById(R.id.btn_addUpdate);
         deleteBtn = findViewById(R.id.btn_delete);
-        addUpdateBtn.setOnClickListener(addUpdateListener);
+        addUpdateBtn.setOnClickListener(addListener);
         deleteBtn.setOnClickListener(deleteListener);
         deleteBtn.setVisibility(View.INVISIBLE);
-        type = getIntent().getCharExtra("type",'a');
-        if(type=='u'){
+
+        type = getIntent().getCharExtra("type", 'a');
+        if (type == 'u') {
             addUpdateBtn.setText("Update");
             deleteBtn.setVisibility(View.VISIBLE);
             fillFields();
+            addUpdateBtn.setOnClickListener(updateListener);
         }
     }
 
-    View.OnClickListener addUpdateListener = view -> {
+    View.OnClickListener addListener = view -> {
         String senderOrReceiver = senderOrReceiverET.getText().toString();
         double amount = Double.parseDouble(amountET.getText().toString());
         TransactionType type = (TransactionType) spinner.getSelectedItem();
         boolean isPending = pendingCB.isChecked();
         String note = noteET.getText().toString();
-        if(senderOrReceiver.isEmpty()){
+        if (senderOrReceiver.isEmpty()) {
             senderOrReceiverET.setError("Cannot be Empty.");
-        }else if(amount<=0){
+        } else if (amount <= 0) {
             amountET.setError("Must be greater than 0.");
-        }else if(note.isEmpty()){
+        } else if (note.isEmpty()) {
             noteET.setError("Cannot be Empty.");
-        }else{
-            addTransaction(new NewTransaction(type,senderOrReceiver,amount,note,isPending));
+        } else {
+            addTransaction(new NewTransaction(type, senderOrReceiver, amount, note, isPending));
             Toast.makeText(this, "Transaction Added Successfully.", Toast.LENGTH_SHORT).show();
             finish();
 
         }
     };
     View.OnClickListener deleteListener = view -> {
-
-    };
-    private void addTransaction(NewTransaction transaction){
+        Transaction t = (Transaction) getIntent().getSerializableExtra("object");
         ApiCalls api = RetrofitClient.getInstance().create(ApiCalls.class);
-        Call<String> call = api.addTransaction(transaction);
+
+        Call<String> call = api.deleteTransaction(t.getId());
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-
 
             }
 
@@ -90,10 +93,29 @@ public class TransactionActivity extends AppCompatActivity {
 
             }
         });
+        finish();
+    };
 
+    private void addTransaction(NewTransaction transaction) {
+       ApiCalls api = RetrofitClient.getInstance().create(ApiCalls.class);
+        Call<String> call = api.addTransaction(transaction);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
-    private void fillFields(){
+    View.OnClickListener updateListener = v->{
+
+    };
+
+    private void fillFields() {
         Transaction t = (Transaction) getIntent().getSerializableExtra("object");
         amountET.setText(String.valueOf(t.getAmount()));
         noteET.setText(t.getNote());
