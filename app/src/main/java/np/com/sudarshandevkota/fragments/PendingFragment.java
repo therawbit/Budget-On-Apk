@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import np.com.sudarshandevkota.Listener.ClickListener;
@@ -48,8 +49,11 @@ public class PendingFragment extends Fragment implements ClickListener {
         call.enqueue(new Callback<ArrayList<Transaction>>() {
             @Override
             public void onResponse(Call<ArrayList<Transaction>> call, Response<ArrayList<Transaction>> response) {
+                if(response.body()==null) {
+                    return;
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    list =(ArrayList<Transaction>) response.body().stream().filter(t->t.isPending()).collect(Collectors.toList());
+                    list =(ArrayList<Transaction>) response.body().stream().filter(t->t.isPending()).sorted(Comparator.comparing(Transaction::getTimestamp).reversed()).collect(Collectors.toList());
                 }
                 adapter = new StatementAdapter(getActivity(),list,PendingFragment.this);
                 pendingRv.setAdapter(adapter);

@@ -63,6 +63,9 @@ public class HomeFragment extends Fragment {
     }
     private void updateFields(ArrayList<Transaction> transactions){
         int total=0,income=0,expense=0,incomePending=0,expensePending=0;
+        if(transactions == null){
+            return;
+        }
         for(Transaction transaction:transactions){
             if(!transaction.isPending()){
                 if(transaction.getTransactionType().equals(TransactionType.INCOME))
