@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         loginBtn.setEnabled(false);
         loginBtn.setOnClickListener(loginListener);
-        toSignUpBtn.setOnClickListener(view -> startActivity(new Intent(view.getContext(),SignupActivity.class)));
+        toSignUpBtn.setOnClickListener(view -> startActivity(new Intent(this,SignupActivity.class)));
         isLoggedIn();
     }
 

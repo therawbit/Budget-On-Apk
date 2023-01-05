@@ -80,7 +80,6 @@ public class SignupActivity extends AppCompatActivity {
 
     }
     private void goToLogin(){
-        startActivity(new Intent(this,LoginActivity.class));
         finish();
     }
     private void showToast(){
