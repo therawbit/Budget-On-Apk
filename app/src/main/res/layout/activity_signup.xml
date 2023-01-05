@@ -12,13 +12,15 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="52dp"
         android:text="Sign in"
         android:textAllCaps="false"
         android:textColor="?attr/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.892"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -91,7 +93,6 @@
         android:id="@+id/btn_signup"
         android:layout_width="190dp"
         android:layout_height="73dp"
-        android:layout_marginBottom="164dp"
         android:text="Sign Up"
         android:textAllCaps="false"
         android:textSize="25sp"
@@ -99,5 +100,17 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_toLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_conPassword" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:text="Already have an account?"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_toLogin"
+        app:layout_constraintEnd_toStartOf="@+id/btn_toLogin"
+        app:layout_constraintHorizontal_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
