@@ -45,7 +45,7 @@ public class PendingFragment extends Fragment implements ClickListener {
     }
     private void loadTransactions(){
         ApiCalls api = RetrofitClient.getInstance().create(ApiCalls.class);
-        Call<ArrayList<Transaction>> call = api.getAllTransactions();
+        Call<ArrayList<Transaction>> call = api.getAllTransactions(true);
         call.enqueue(new Callback<ArrayList<Transaction>>() {
             @Override
             public void onResponse(Call<ArrayList<Transaction>> call, Response<ArrayList<Transaction>> response) {
@@ -53,7 +53,7 @@ public class PendingFragment extends Fragment implements ClickListener {
                     return;
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    list =(ArrayList<Transaction>) response.body().stream().filter(t->t.isPending()).sorted(Comparator.comparing(Transaction::getTimestamp).reversed()).collect(Collectors.toList());
+                    list = (ArrayList<Transaction>) response.body().stream().sorted(Comparator.comparing(Transaction::getTimestamp).reversed()).collect(Collectors.toList());
                 }
                 adapter = new StatementAdapter(getActivity(),list,PendingFragment.this);
                 pendingRv.setAdapter(adapter);

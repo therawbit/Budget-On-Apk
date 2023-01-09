@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -47,7 +46,7 @@ public class StatementFragment extends Fragment implements ClickListener {
     }
     private void loadTransactions(){
         ApiCalls api = RetrofitClient.getInstance().create(ApiCalls.class);
-        Call<ArrayList<Transaction>> call = api.getAllTransactions();
+        Call<ArrayList<Transaction>> call = api.getAllTransactions(false);
         call.enqueue(new Callback<ArrayList<Transaction>>() {
             @Override
             public void onResponse(Call<ArrayList<Transaction>> call, Response<ArrayList<Transaction>> response) {
@@ -55,7 +54,7 @@ public class StatementFragment extends Fragment implements ClickListener {
                     return;
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    list =(ArrayList<Transaction>) response.body().stream().filter(t->!t.isPending()).sorted(Comparator.comparing(Transaction::getTimestamp).reversed()).collect(Collectors.toList());
+                    list = (ArrayList<Transaction>) response.body().stream().sorted(Comparator.comparing(Transaction::getTimestamp).reversed()).collect(Collectors.toList());
                 }
                 adapter = new StatementAdapter(getActivity(),list,StatementFragment.this);
                statementRV.setAdapter(adapter);

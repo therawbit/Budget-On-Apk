@@ -48,43 +48,29 @@ public class HomeFragment extends Fragment {
     }
     private void loadTransactions(){
         ApiCalls api = RetrofitClient.getInstance().create(ApiCalls.class);
-        Call<ArrayList<Transaction>> call = api.getAllTransactions();
-        call.enqueue(new Callback<ArrayList<Transaction>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Transaction>> call, Response<ArrayList<Transaction>> response) {
-                updateFields(response.body());
-            }
+       Call<ArrayList<Integer>> call = api.getTransactionSummary();
+       call.enqueue(new Callback<ArrayList<Integer>>() {
+           @Override
+           public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
+               Log.d("TAG", "onResponse: into the response");
+           }
 
-            @Override
-            public void onFailure(Call<ArrayList<Transaction>> call, Throwable t) {
+           @Override
+           public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
 
-            }
-        });
+           }
+       });
     }
-    private void updateFields(ArrayList<Transaction> transactions){
-        int total=0,income=0,expense=0,incomePending=0,expensePending=0;
-        if(transactions == null){
-            return;
-        }
-        for(Transaction transaction:transactions){
-            if(!transaction.isPending()){
-                if(transaction.getTransactionType().equals(TransactionType.INCOME))
-                    income+=transaction.getAmount();
-                else
-                    expense+=transaction.getAmount();
-            }
-            else{
-                if(transaction.getTransactionType().equals(TransactionType.INCOME))
-                    incomePending+=transaction.getAmount();
-                else
-                    expensePending+=transaction.getAmount();
-            }
-        }
-        total=income-expense;
+    private void updateFields(String body){
+        Log.d("TAG", "updateFields: "+body.split(","));
+        String[] str =body.split(",");
+        Log.d("TAG", "updateFields: "+str);
+
+        int total = Integer.parseInt(str[0])-Integer.parseInt(str[1]);
         totalTV.setText("Rs. "+ total);
-        incomeTV.setText("Rs. "+ income);
-        expenseTV.setText("Rs. "+ expense);
-        incomePendingTV.setText("Rs. "+ incomePending);
-        expensePendingTV.setText("Rs. "+ expensePending);
+        incomeTV.setText("Rs. "+ str[0]);
+        expenseTV.setText("Rs. "+ str[1]);
+        incomePendingTV.setText("Rs. "+ str[2]);
+        expensePendingTV.setText("Rs. "+ str[3]);
     }
 }
