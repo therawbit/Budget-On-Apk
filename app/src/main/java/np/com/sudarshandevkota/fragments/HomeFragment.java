@@ -48,29 +48,27 @@ public class HomeFragment extends Fragment {
     }
     private void loadTransactions(){
         ApiCalls api = RetrofitClient.getInstance().create(ApiCalls.class);
-       Call<ArrayList<Integer>> call = api.getTransactionSummary();
-       call.enqueue(new Callback<ArrayList<Integer>>() {
+       Call<ArrayList<String>> call = api.getTransactionSummary();
+       call.enqueue(new Callback<ArrayList<String>>() {
            @Override
-           public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
-               Log.d("TAG", "onResponse: into the response");
+           public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
+               Log.d("TAG", "onResponse: "+response.body());
+               updateFields(response.body());
            }
 
            @Override
-           public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
+           public void onFailure(Call<ArrayList<String>> call, Throwable t) {
 
            }
        });
     }
-    private void updateFields(String body){
-        Log.d("TAG", "updateFields: "+body.split(","));
-        String[] str =body.split(",");
-        Log.d("TAG", "updateFields: "+str);
+    private void updateFields(ArrayList<String> str){
 
-        int total = Integer.parseInt(str[0])-Integer.parseInt(str[1]);
-        totalTV.setText("Rs. "+ total);
-        incomeTV.setText("Rs. "+ str[0]);
-        expenseTV.setText("Rs. "+ str[1]);
-        incomePendingTV.setText("Rs. "+ str[2]);
-        expensePendingTV.setText("Rs. "+ str[3]);
+       double total = Double.parseDouble(str.get(0))-Double.parseDouble(str.get(1));
+        totalTV.setText("Rs. "+ String.valueOf(total));
+        incomeTV.setText("Rs. "+ str.get(0));
+        expenseTV.setText("Rs. "+ str.get(1));
+        incomePendingTV.setText("Rs. "+ str.get(2));
+        expensePendingTV.setText("Rs. "+ str.get(3));
     }
 }

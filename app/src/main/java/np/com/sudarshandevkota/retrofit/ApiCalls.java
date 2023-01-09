@@ -40,5 +40,5 @@ public interface ApiCalls {
     Call<String> updateTransaction(@Body Transaction transaction);
 
     @GET("/transaction/summary")
-    Call<ArrayList<Integer>> getTransactionSummary();
+    Call<ArrayList<String>> getTransactionSummary();
 }
