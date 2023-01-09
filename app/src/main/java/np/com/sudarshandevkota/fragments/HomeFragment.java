@@ -63,7 +63,11 @@ public class HomeFragment extends Fragment {
        });
     }
     private void updateFields(ArrayList<String> str){
-
+        if(str==null){
+            return;
+        }
+        if(str.get(0).equals("null") || str.get(1).equals("null"))
+            return;
        double total = Double.parseDouble(str.get(0))-Double.parseDouble(str.get(1));
         totalTV.setText("Rs. "+ String.valueOf(total));
         incomeTV.setText("Rs. "+ str.get(0));
