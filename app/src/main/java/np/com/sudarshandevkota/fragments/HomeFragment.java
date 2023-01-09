@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 import np.com.sudarshandevkota.R;
 import np.com.sudarshandevkota.TransactionActivity;
-import np.com.sudarshandevkota.model.Transaction;
-import np.com.sudarshandevkota.model.TransactionType;
 import np.com.sudarshandevkota.retrofit.ApiCalls;
 import np.com.sudarshandevkota.retrofit.RetrofitClient;
 import retrofit2.Call;
