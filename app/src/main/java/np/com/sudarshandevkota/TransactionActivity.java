@@ -2,9 +2,7 @@ package np.com.sudarshandevkota;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,9 +10,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.net.CacheRequest;
-
 import np.com.sudarshandevkota.model.NewTransaction;
 import np.com.sudarshandevkota.model.Transaction;
 import np.com.sudarshandevkota.model.TransactionType;
