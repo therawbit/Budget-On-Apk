@@ -60,7 +60,10 @@ public class TransactionActivity extends AppCompatActivity {
 
     View.OnClickListener addListener = view -> {
         String senderOrReceiver = senderOrReceiverET.getText().toString();
-        double amount = Double.parseDouble(amountET.getText().toString());
+        boolean isValid = amountET.getText().toString().trim().isEmpty();
+        double amount = -1;
+        if(!isValid)
+            amount = Double.parseDouble(amountET.getText().toString());
         TransactionType type = (TransactionType) spinner.getSelectedItem();
         boolean isPending = pendingCB.isChecked();
         String note = noteET.getText().toString();
